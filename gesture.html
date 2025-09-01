@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Touchless Camera Gesture</title>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+<style>
+  #videoBox { width: 640px; height: 480px; background: black; }
+  #status { margin-top: 5px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<video id="videoBox" autoplay muted></video><br>
+<button id="startBtn">Start Camera</button>
+<button id="stopBtn">Stop Camera</button>
+<div id="status">Camera OFF</div>
+
+<script>
+let video = document.getElementById('videoBox');
+let startBtn = document.getElementById('startBtn');
+let stopBtn = document.getElementById('stopBtn');
+let status = document.getElementById('status');
+let stream;
+let model;
+let detecting = false;
+
+async function loadModel() {
+  model = await handpose.load();
+  console.log("Handpose model loaded");
+}
+
+async function startCamera() {
+  stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  video.srcObject = stream;
+  status.textContent = "Camera ON";
+  detecting = true;
+  detectHands();
+}
+
+function stopCamera() {
+  if(stream) {
+    stream.getTracks().forEach(track => track.stop());
+    status.textContent = "Camera OFF";
+    detecting = false;
+  }
+}
+
+async function detectHands() {
+  while(detecting) {
+    const predictions = await model.estimateHands(video);
+    if(predictions.length > 0) {
+      console.log("Hand detected!", predictions);
+      // Here you can trigger your touchless actions
+    }
+    await new Promise(r => setTimeout(r, 100)); // adjust for performance
+  }
+}
+
+startBtn.addEventListener('click', startCamera);
+stopBtn.addEventListener('click', stopCamera);
+loadModel();
+</script>
+
+</body>
+</html>
