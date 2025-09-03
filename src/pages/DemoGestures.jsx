@@ -3,12 +3,17 @@ import CameraBox from "../components/CameraBox";
 import GestureOverlay from "../components/GestureOverlay";
 import "../App.css";
 
-function Home() {
+function DemoGestures() {
   const [cameraOn, setCameraOn] = useState(false);
 
   return (
-    <div className="home-container">
-      <h1>Touchless Web - Home</h1>
+    <div className="demo-gestures-container">
+      <h1>Gesture Demo</h1>
+      <p>
+        This page is for testing gesture recognition. Start the camera and try
+        moving your hand in front of it. Detected gestures will be logged in the
+        console for now.
+      </p>
 
       {/* Camera + Overlay */}
       <div className="camera-container">
@@ -30,4 +35,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default DemoGestures;

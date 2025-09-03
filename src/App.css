@@ -1,38 +1,86 @@
-.App {
+/* Global reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #222;
+}
+
+/* App container */
+.app-container {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navbar styles */
+.navbar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: black;
   color: white;
+  padding: 10px 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar h2 {
+  margin: 0;
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-links li a:hover {
+  color: green;
+}
+
+/* Page section containers */
+.home-container,
+.slots-container,
+.about-container,
+.demo-container {
+  padding: 20px;
+}
+
+/* Camera box styling */
+.camera-box {
+  margin: 20px auto;
+  border: 2px solid red;
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: green;
+}
+
+/* Canvas overlay */
+.gesture-overlay canvas {
+  border: 2px dashed red;
+  border-radius: 10px;
 }
